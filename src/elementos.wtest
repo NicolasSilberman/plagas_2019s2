@@ -15,7 +15,7 @@ describe "elementos"{
 	const barrio2 = new Barrio()
 	
 	const garrapatas = new Garrapatas()
-	const garrapatasInofensivas = new Garrapatas
+	const garrapatasInofensivas = new Garrapatas()
 	
 	fixture{
 		barrio1.agregarElementos([hogar1,huerta1,mascota1])
@@ -23,6 +23,7 @@ describe "elementos"{
 		nivelDeHuerta.nivel(25)
 		garrapatas.poblacion(20)
 		garrapatasInofensivas.poblacion(2)
+		
 	}
 	
 	test "barrio 1"{
@@ -53,7 +54,7 @@ describe "elementos"{
 		assert.equals(180,mascota1.nivelDeSalud())
 		assert.notThat(mascota1.esBuena())
 		mascota1.esAtacadoPor(garrapatasInofensivas)
-		assert.equals(180,mascota1.nivelDeSalud())	
+		assert.equals(180,mascota1.nivelDeSalud())
 	}
 	
 }
