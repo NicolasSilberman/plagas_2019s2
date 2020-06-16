@@ -28,12 +28,11 @@ class Hogar {
 
 class Huerta {
 	var property capacidadProduccion
-	var property nivel
 	
-	method esBuena() {return capacidadProduccion > nivel}
+	method esBuena() {return capacidadProduccion > nivelDeHuerta.nivel()}
 	method esAtacadoPor(plaga) {
-		capacidadProduccion -= plaga.nivelDeDanio() * 0.10
-		if (plaga.transmiteEnfermedades()) {capacidadProduccion -= 10}
+		capacidadProduccion = (capacidadProduccion - plaga.nivelDeDanio() * 0.10).max(0)
+		if (plaga.transmiteEnfermedades()) {capacidadProduccion = (capacidadProduccion - 10).max(0)}
 	}
 	
 }
@@ -43,6 +42,10 @@ class Mascota {
 	
 	method esBuena() {return nivelDeSalud > 250}
 	method esAtacadoPor(plaga) {
-		if(plaga.transmiteEnfermedades()) {nivelDeSalud -= plaga.nivelDeDanio()}
+		if(plaga.transmiteEnfermedades()) {nivelDeSalud = (nivelDeSalud - plaga.nivelDeDanio()).max(0)}
 	}
+}
+
+object nivelDeHuerta {
+	var property nivel
 }

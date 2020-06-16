@@ -1,0 +1,60 @@
+import plagas.*
+import elementos.*
+
+describe "elementos"{
+	
+	const hogar1 = new Hogar(nivelDeMugre = 50, confort = 99)
+	const huerta1 = new Huerta(capacidadProduccion = 20)
+	const mascota1 = new Mascota(nivelDeSalud = 300)
+	
+	const hogar2 = new Hogar(nivelDeMugre = 40, confort = 100)
+	const huerta2 = new Huerta(capacidadProduccion = 30)
+	const mascota2 = new Mascota(nivelDeSalud = 200)
+	
+	const barrio1 = new Barrio()
+	const barrio2 = new Barrio()
+	
+	const garrapatas = new Garrapatas()
+	const garrapatasInofensivas = new Garrapatas
+	
+	fixture{
+		barrio1.agregarElementos([hogar1,huerta1,mascota1])
+		barrio2.agregarElementos([hogar2,huerta2,mascota2])
+		nivelDeHuerta.nivel(25)
+		garrapatas.poblacion(20)
+		garrapatasInofensivas.poblacion(2)
+	}
+	
+	test "barrio 1"{
+		assert.notThat(hogar1.esBuena())
+		assert.notThat(huerta1.esBuena())
+		assert.that(mascota1.esBuena())
+		assert.notThat(barrio1.esCopado())
+	}
+	
+	test "barrio 2"{
+		assert.that(hogar2.esBuena())
+		assert.that(huerta2.esBuena())
+		assert.notThat(mascota2.esBuena())
+		assert.that(barrio2.esCopado())
+	}
+	
+	test "elementos atacados"{
+		hogar2.esAtacadoPor(garrapatas)
+		assert.equals(80,hogar2.nivelDeMugre())
+		assert.notThat(hogar2.esBuena())
+		huerta2.esAtacadoPor(garrapatas)
+		assert.equals(16,huerta2.capacidadProduccion())
+		assert.notThat(huerta2.esBuena())
+		assert.notThat(barrio2.esCopado())
+		mascota1.esAtacadoPor(garrapatas)
+		mascota1.esAtacadoPor(garrapatas)
+		mascota1.esAtacadoPor(garrapatas)
+		assert.equals(180,mascota1.nivelDeSalud())
+		assert.notThat(mascota1.esBuena())
+		mascota1.esAtacadoPor(garrapatasInofensivas)
+		assert.equals(180,mascota1.nivelDeSalud())	
+	}
+	
+}
+

@@ -1,0 +1,46 @@
+import plagas.*
+import elementos.*
+
+describe "plagas"
+{
+	const cucarachas = new Cucarachas(poblacion = 10, pesoPromedio = 8)
+	const mosquitos = new Mosquitos(poblacion = 13)
+	const pulgas = new Pulgas(poblacion = 9)
+	const garrapatas = new Garrapatas(poblacion = 20)
+	
+	const hogar1 = new Hogar(nivelDeMugre = 200, confort = 400)
+	
+	test "cucarachas"{
+		assert.notThat(cucarachas.transmiteEnfermedades())
+		assert.equals(5,cucarachas.nivelDeDanio())
+		assert.equals(8,cucarachas.pesoPromedio())
+		cucarachas.atacarA(hogar1)
+		assert.that(cucarachas.transmiteEnfermedades())
+		assert.equals(5.5,cucarachas.nivelDeDanio())
+		assert.equals(10,cucarachas.pesoPromedio())
+		assert.equals(11,cucarachas.poblacion())
+	}
+	
+	test "mosquitos"{
+		assert.notThat(mosquitos.transmiteEnfermedades())
+		assert.equals(13,mosquitos.nivelDeDanio())
+		mosquitos.atacarA(hogar1)
+		assert.that(mosquitos.transmiteEnfermedades())
+		assert.equals(15,mosquitos.poblacion())
+	}
+	
+	test "pulgas"{
+		assert.notThat(pulgas.transmiteEnfermedades())
+		assert.equals(18,pulgas.nivelDeDanio())
+		pulgas.atacarA(hogar1)
+		assert.equals(10,pulgas.poblacion())
+	}
+	
+	test "garrapatas"{
+		assert.that(garrapatas.transmiteEnfermedades())
+		assert.equals(40,garrapatas.nivelDeDanio())
+		garrapatas.atacarA(hogar1)
+		assert.equals(24,garrapatas.poblacion())
+	}
+	
+}

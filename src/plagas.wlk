@@ -6,7 +6,7 @@ class Plagas {
 	method transmiteEnfermedades() {return self.poblacion() >= 10}
 	method atacarA(elemento) {
 		elemento.esAtacadoPor(self)
-		poblacion *= self.aumentoPoblacion()
+		poblacion = (poblacion * self.aumentoPoblacion()).roundUp()
 	}
 	method nivelDeDanio() {return poblacion}
 	method aumentoPoblacion() {return 1.10}
